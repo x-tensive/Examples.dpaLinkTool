@@ -63,6 +63,28 @@ namespace dpaLinkTool.Client
             return indicatorsResponse;
         }
 
+        public async Task<IndicatorValue[]> GetIndicatorValues(long indicatorId, DateTime from, DateTime to)
+        {
+            var payload = JsonSerializer.Serialize(new {
+                dateTimeFrom = (DateTimeOffset)from,
+                dateTimeUntil = (DateTimeOffset)to,
+                indicators = new long[] { indicatorId },
+                gridOptions = new {
+                    skip = 0
+                }
+            });
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+            var response = await Client.PostAsync("/api/dashboard/getIndicatorData", content);
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new InvalidOperationException($"Action failed: {response.StatusCode}");
+
+            var responseContent = await response.Content.ReadAsStreamAsync();
+            var indicatorValuesResponse = await JsonSerializer.DeserializeAsync<IndicatorValue[]>(responseContent);
+
+            return indicatorValuesResponse;
+        }
+
         // ctor
         public DpaRestClient(string baseAddress)
         {

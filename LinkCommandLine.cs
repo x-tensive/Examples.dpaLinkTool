@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.CommandLine.Parsing;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +45,15 @@ namespace dpaLinkTool
             return command;
         }
 
+        private static Command WithDateTimeOption(this Command command, string alias, string description, bool isRequired = false)
+        {
+            command.AddOption(new System.CommandLine.Option(alias, description) {
+                IsRequired = isRequired,
+                Argument = new Argument<DateTime>((ArgumentResult argumentResult) => DateTime.Parse(argumentResult.Tokens.Single().Value))
+            }); ;
+            return command;
+        }
+
         private static Command WithGetCommands(this Command parent)
         {
             var extCmd = BuildCommand("get", true)
@@ -72,11 +83,27 @@ namespace dpaLinkTool
             return parent;
         }
 
+        private static Command WithPushCommands(this Command parent)
+        {
+            var extCmd = BuildCommand("push", true)
+                .WithSubCommand("indicators", true, subCommand => {
+                    subCommand
+                    .WithHandler(CommandHandler.Create((DateTime from, DateTime to, string cfg) => PushHandler.PushIndicators(from, to, cfg)))
+                    .WithDateTimeOption("--from", "period FROM", true)
+                    .WithDateTimeOption("--to", "period TO", true)
+                    .WithOption<string>("--cfg", "cfg file name", true);
+                });
+
+            parent.AddCommand(extCmd);
+            return parent;
+        }
+
         public static async Task<int> Run(params string[] args)
         {
             var rootCmd = BuildRootCommand("DPA LINK tool")
                 .WithGetCommands()
-                .WithCreateConnectorsConfigCommands();
+                .WithCreateConnectorsConfigCommands()
+                .WithPushCommands();
 
             return await rootCmd.InvokeAsync(args);
         }

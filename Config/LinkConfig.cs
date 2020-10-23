@@ -6,6 +6,8 @@ namespace dpaLinkTool.Config
     {
         public static DpaConfig DPA { get; private set; }
 
+        public static ConnectorsCfg Connectors { get; private set; }
+
         public static void Setup()
         {
             var configuration = new ConfigurationBuilder()
@@ -14,6 +16,9 @@ namespace dpaLinkTool.Config
 
             LinkConfig.DPA = new DpaConfig();
             configuration.Bind("dpa", LinkConfig.DPA);
+
+            LinkConfig.Connectors = new ConnectorsCfg();
+            LinkConfig.Connectors.Setup(configuration.GetSection("connectors"));
         }
     }
 }
