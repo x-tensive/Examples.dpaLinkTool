@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "dpaLinkTool": {
+      "commandName": "Project",
+      "commandLineArgs": "createConnectorsConfig indicators --fileName \"1.xml\""
+    }
+  }
+}

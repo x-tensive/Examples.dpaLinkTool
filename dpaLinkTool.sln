@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dpaLinkTool", "dpaLinkTool.csproj", "{5EA5CB17-1277-48CE-A778-27330EC306FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EA5CB17-1277-48CE-A778-27330EC306FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA5CB17-1277-48CE-A778-27330EC306FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA5CB17-1277-48CE-A778-27330EC306FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA5CB17-1277-48CE-A778-27330EC306FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35C1CCA8-DCA2-42AF-8FAD-5A1E11739685}
+	EndGlobalSection
+EndGlobal
