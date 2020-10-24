@@ -29,10 +29,10 @@ namespace dpaLinkTool.Handlers
                 
                 foreach (var equipmentCfg in cfg) {
                     foreach (var indicatorCfg in equipmentCfg.Indicators) {
-                        var connector = LinkConfig.Connectors.CreateConnector(indicatorCfg.Connector);
-
-                        var values = await client.GetIndicatorValues(indicatorCfg.ID, from, to);
-                        connector.Push(equipmentCfg, indicatorCfg, values);
+                        using (var connector = LinkConfig.Connectors.CreateConnector(indicatorCfg.Connector, $"{equipmentCfg.Name} / {indicatorCfg.Name}")) {
+                            var values = await client.GetIndicatorValues(indicatorCfg.ID, from, to);
+                            connector.Push(equipmentCfg, indicatorCfg, values);
+                        }
                     }
                 }
             }

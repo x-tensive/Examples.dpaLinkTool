@@ -13,6 +13,6 @@ namespace dpaLinkTool.Config
 
         public ConnectorParamCfg[] Params { get; set; }
 
-        public abstract ConnectorBase CreateConnector();
+        public abstract ConnectorBase CreateConnector(string actionName);
     }
 }

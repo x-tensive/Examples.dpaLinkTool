@@ -43,9 +43,9 @@ namespace dpaLinkTool.Config
             return connectorCfgHash[name];
         }
 
-        public ConnectorBase CreateConnector(string name)
+        public ConnectorBase CreateConnector(string name, string actionName)
         {
-            return connectorCfgHash[name].CreateConnector();
+            return connectorCfgHash[name].CreateConnector(actionName);
         }
 
         public void Setup(IConfigurationSection configuration)

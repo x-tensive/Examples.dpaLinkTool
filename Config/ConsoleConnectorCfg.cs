@@ -9,9 +9,9 @@ namespace dpaLinkTool.Config
     {
         public string Format { get; set; }
 
-        public override ConnectorBase CreateConnector()
+        public override ConnectorBase CreateConnector(string actionName)
         {
-            return new ConsoleConnector(this);
+            return new ConsoleConnector(this, actionName);
         }
     }
 }

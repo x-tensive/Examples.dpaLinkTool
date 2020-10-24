@@ -25,8 +25,12 @@ namespace dpaLinkTool.Connectors
             }
         }
 
+        protected override void Dispose(bool full)
+        {
+        }
+
         // ctor
-        public ConsoleConnector(ConsoleConnectorCfg cfg)
+        public ConsoleConnector(ConsoleConnectorCfg cfg, string actionName): base(actionName)
         {
             this.Cfg = cfg;
         }

@@ -11,9 +11,9 @@ namespace dpaLinkTool.Config
 
         public string Command { get; set; }
 
-        public override ConnectorBase CreateConnector()
+        public override ConnectorBase CreateConnector(string actionName)
         {
-            return new MssqlConnector(this);
+            return new MssqlConnector(this, actionName);
         }
     }
 }
