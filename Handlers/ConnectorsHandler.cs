@@ -1,6 +1,7 @@
 ﻿using dpaLinkTool.Client;
 using dpaLinkTool.Config;
 using dpaLinkTool.Models;
+using ShellProgressBar;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,17 +39,30 @@ namespace dpaLinkTool.Handlers
             return cfg;
         }
 
+        private static EquipmentConnectorCfg[] CreateCfg(DpaRestClient client, Equipment[] equipment)
+        {
+            using (var progressBar = new ProgressBar(equipment.Length, "", ConsoleColor.DarkGray)) {
+
+                var cfg = equipment
+                    .Select(async (Equipment equipmentInstance) => {
+                        var equipmentCfg = await CreateEquipmentConnectorCfg(client, equipmentInstance);
+                        progressBar.Tick(equipmentCfg.Name);
+                        return equipmentCfg;
+                    })
+                    .Select(action => action.Result)
+                    .ToArray();
+
+                return cfg;
+            }
+        }
+
         public async static Task CreateIndicators(string fileName)
         {
             using (var client = new DpaRestClient(LinkConfig.DPA.BaseUrl)) {
                 await client.Login(LinkConfig.DPA.UserName, LinkConfig.DPA.Password);
                 var equipment = await client.GetEquipment();
-
-                var cfg = equipment
-                    .Select(async equipmentInstance => await CreateEquipmentConnectorCfg(client, equipmentInstance))
-                    .Select(action => action.Result)
-                    .ToArray();
-
+                var cfg = CreateCfg(client, equipment);
+                
                 using (var xmlFile = new FileStream(fileName, FileMode.Create)) {
                     using (var xmlWriter = XmlWriter.Create(xmlFile, new XmlWriterSettings { Indent = true })) {
                         var xmlSerializer = new XmlSerializer(typeof(EquipmentConnectorCfg[]));
