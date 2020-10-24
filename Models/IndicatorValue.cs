@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace dpaLinkTool.Models
@@ -11,6 +12,6 @@ namespace dpaLinkTool.Models
         public DateTimeOffset TimeStamp { get; set; }
 
         [JsonPropertyName("value")]
-        public object Value { get; set; }
+        public JsonElement Value { get; set; }
     }
 }

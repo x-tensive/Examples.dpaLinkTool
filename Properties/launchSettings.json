@@ -2,7 +2,7 @@
   "profiles": {
     "dpaLinkTool": {
       "commandName": "Project",
-      "commandLineArgs": "createConnectorsConfig indicators --fileName \"1.xml\""
+      "commandLineArgs": "push indicators --from \"20.10.2020 00:00:00\" --to \"21.10.2020 00:00:00\" --cfg \"1.xml\""
     }
   }
 }
