@@ -41,7 +41,15 @@ namespace dpaLinkTool.Handlers
 
         private static EquipmentConnectorCfg[] CreateCfg(DpaRestClient client, Equipment[] equipment)
         {
-            using (var progressBar = new ProgressBar(equipment.Length, "", ConsoleColor.DarkGray)) {
+            var progressBarOptions = new ProgressBarOptions {
+                ProgressCharacter = '─',
+                ProgressBarOnBottom = true,
+                ForegroundColor = ConsoleColor.White,
+                BackgroundColor = ConsoleColor.DarkGray,
+                ForegroundColorDone = ConsoleColor.Gray
+            };
+
+            using (var progressBar = new ProgressBar(equipment.Length, "", progressBarOptions)) {
 
                 var cfg = equipment
                     .Select(async (Equipment equipmentInstance) => {
