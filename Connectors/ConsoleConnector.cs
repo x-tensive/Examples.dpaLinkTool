@@ -13,19 +13,13 @@ namespace dpaLinkTool.Connectors
 
         public override void Push(EquipmentConnectorCfg equipment, IndicatorConnectorCfg indicator, IndicatorValue[] values)
         {
-            var paramLambdas = Cfg.Params
-                    .Select(p => new { Name = p.Name, Lambda = GetParamValueLambda(p.Value) })
-                    .ToDictionary(p => p.Name, p => p.Lambda);
-
             foreach (var value in values) {
 
-                var paramValues = Cfg.Params
-                    .Select(p => new { Name = p.Name, Value = GetParamValue(paramLambdas[p.Name], equipment, indicator, value) })
-                    .ToArray();
-
                 string outString = Cfg.Format;
-                foreach (var paramValue in paramValues)
-                    outString = outString.Replace("{" + paramValue.Name + "}", paramValue.Value.ToString());
+                foreach (var param in Cfg.Params) {
+                    var paramValue = param.GetParamValue(equipment, indicator, value);
+                    outString = outString.Replace("{" + param.Name + "}", paramValue.ToString());
+                }
 
                 Console.WriteLine(outString);
             }

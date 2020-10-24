@@ -27,6 +27,17 @@ namespace dpaLinkTool.Config
             };
         }
 
+        private MssqlConnectorCfg CreateMssqlConnectorCfg(string name, IConfigurationSection configuration)
+        {
+            return new MssqlConnectorCfg {
+                Name = name,
+                Type = "mssql",
+                Connection = configuration.GetValue<string>("connection"),
+                Command = configuration.GetValue<string>("command"),
+                Params = GetParams(configuration.GetSection("params")).ToArray()
+            };
+        }
+
         public ConnectorCfgBase GetConnectorCfg(string name)
         {
             return connectorCfgHash[name];
@@ -45,6 +56,8 @@ namespace dpaLinkTool.Config
                 var connectorType = childConfig.GetValue<string>("type");
                 if (connectorType == "console")
                     connectorCfgHash.Add(childConfig.Key, CreateConsoleConnectorCfg(childConfig.Key, childConfig));
+                else if (connectorType == "mssql")
+                    connectorCfgHash.Add(childConfig.Key, CreateMssqlConnectorCfg(childConfig.Key, childConfig));
                 else
                     throw new NotSupportedException();
             }
