@@ -26,3 +26,9 @@ dpaLinkTool - это пример вызова REAST API DPA и применен
   } 
 }
 ```
+
+# Список рабочих центров
+
+```cmd
+dpaLinkTool get equipment
+```
