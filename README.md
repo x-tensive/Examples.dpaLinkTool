@@ -4,12 +4,11 @@ dpaLinkTool - это пример вызова REAST API DPA и применен
 
 # appsettings.json
 
+Базовый адрес DPA и учетная запись для вызовов REST API:
 ```json
-{
-  "dpa": {
-    "baseUrl": "http://dpadev.intranet.x-tensive.com",
-    "userName": "admin",
-    "password": "admin"
-  }
+"dpa": {
+  "baseUrl": "http://dpadev.intranet.x-tensive.com",
+  "userName": "admin",
+  "password": "admin"
 }
 ```
