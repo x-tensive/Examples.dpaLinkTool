@@ -103,3 +103,20 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
   }
 }
 ```
+# Пример настройки коннектора MSSQL
+
+```json
+"insert1": {
+  "type": "mssql",
+  "connection": "Integrated Security=true;Initial Catalog=IntegrationData;Server=.",
+  "command": "INSERT INTO [dbo].[FloatIndicators] ([EquipmentID], [EquipmentName], [IndicatorID], [IndicatorName], [TimeStamp], [Value]) VALUES (@equipmentId, @equipmentName, @indicatorId, @indicatorName, @timeStamp, @value)",
+  "params": {
+    "@equipmentId": "equipment.ID",
+    "@equipmentName": "equipment.Name",
+    "@indicatorId": "indicator.ID",
+    "@indicatorName": "indicator.Name",
+    "@timeStamp": "value.TimeStamp",
+    "@value": "value.Value.GetDouble()"
+  }
+}
+```
