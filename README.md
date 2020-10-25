@@ -87,3 +87,19 @@ dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04
 ```cmd
 dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 ```
+
+# Пример настройки коннектора CONSOLE
+
+```json
+"out1": {
+  "type": "console",
+  "format": "ID={p0} : {p1} : {p2} = {p4} ({p3})",
+  "params": {
+    "p0": "equipment.ID",
+    "p1": "equipment.Name",
+    "p2": "indicator.Name",
+    "p3": "value.TimeStamp.LocalDateTime",
+    "p4": "value.Value.ToString()"
+  }
+}
+```
