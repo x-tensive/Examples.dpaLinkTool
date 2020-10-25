@@ -81,3 +81,9 @@ dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04
   </EquipmentConnectorCfg>
 </ArrayOfEquipmentConnectorCfg>
 ```
+
+# Генерация файла конфигурации индикторов и коннекторов
+
+```cmd
+dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
+```
