@@ -30,14 +30,14 @@ dpaLinkTool - это пример вызова REST API DPA и применен�
 # Список рабочих центров
 
 ```cmd
-dpaLinkTool get equipment
+dpaLinkTool.exe get equipment
 ```
 Список рабочих центров в формате json будет выведен в STDOUT.
 
 # Список индикаторов
 
 ```cmd
-dpaLinkTool get indicators
+dpaLinkTool.exe get indicators
 ```
 Список индикаторов в формате json будет выведен в STDOUT.
 
