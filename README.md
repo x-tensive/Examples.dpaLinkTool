@@ -32,3 +32,11 @@ dpaLinkTool - это пример вызова REAST API DPA и применен
 ```cmd
 dpaLinkTool get equipment
 ```
+Список рабочих центров в формате json будет выведен в STDOUT.
+
+# Список индикаторов
+
+```cmd
+dpaLinkTool get indicators
+```
+Список индикаторов в формате json будет выведен в STDOUT.
