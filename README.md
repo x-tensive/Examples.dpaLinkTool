@@ -17,7 +17,7 @@ dpaLinkTool - это пример вызова REAST API DPA и применен
 ```json
 "connectors": {
   "connectorName": {
-    "type": connectorType,
+    "type": "connectorType",
     "params": {
       "paramName1": "paramExpression1",
       "paramName2": "paramExpression3",
