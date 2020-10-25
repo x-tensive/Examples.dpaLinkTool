@@ -17,13 +17,13 @@ dpaLinkTool - это пример вызова REAST API DPA и применен
 ```json
 "connectors": {
   "connectorName": {
-    "type": "connectorType",
-    ... other connector settings
+    "type": connectorType,
+    // ... other connector settings
     "params": {
-      "paramName1": "paramExpression1",
-      "paramName2": "paramExpression3",
-      "paramName3": "paramExpression4",
-      ... other params
+      "paramName1": paramExpression1,
+      "paramName2": paramExpression3,
+      "paramName3": paramExpression4,
+      // ... other params
     }
  } 
 }
