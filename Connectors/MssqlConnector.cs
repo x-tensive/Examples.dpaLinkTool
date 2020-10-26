@@ -30,10 +30,9 @@ namespace dpaLinkTool.Connectors
                             cmd.Parameters.Add(sqlParam);
                         }
                         cmd.ExecuteNonQuery();
-
-                        progressBar.Tick();
                     }
 
+                    progressBar.Tick();
                 }
             }
         }
