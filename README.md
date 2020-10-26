@@ -126,5 +126,7 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 $currentTime = Get-Date
 $periodTo = $currentTime.Date.AddHours($currentTime.Hour)
 $periodFrom = $periodTo.AddHours(-1)
-dpaLinkTool.exe push indicators --from "$periodFrom" --to "$periodTo" --cfg "cfg.xml"
+$periodToStr = $periodTo.ToString()
+$periodFromStr = $periodFrom.ToString()
+dpaLinkTool.exe push indicators --from "$periodFromStr" --to "$periodToStr" --cfg "cfg.xml"
 ```
