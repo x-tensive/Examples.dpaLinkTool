@@ -120,3 +120,11 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
   }
 }
 ```
+
+# Импорт данных за предыдущий час
+```powershell
+$currentTime = Get-Date
+$periodTo = $currentTime.Date.AddHours($currentTime.Hour)
+$periodFrom = $periodTo.AddHours(-1)
+dpaLinkTool.exe push indicators --from "$periodFrom" --to "$periodTo" --cfg "cfg.xml"
+```
