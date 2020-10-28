@@ -1,10 +1,10 @@
 # Examples.dpaLinkTool
 
-dpaLinkTool - это пример вызова REST API DPA и применение коннекторов для передачи данных из DPA в другие системы.
+This project contains an example code of how to call DPA REST API and how to utilize "connectors" to push data from DPA to external systems.
 
 # appsettings.json
 
-Базовый адрес DPA и учетная запись для вызовов REST API:
+Base url and account to access REST API:
 ```json
 "dpa": {
   "baseUrl": "http://dpadev.intranet.x-tensive.com",
@@ -13,7 +13,7 @@ dpaLinkTool - это пример вызова REST API DPA и применен�
 }
 ```
 
-Настройка коннекторов:
+Connectors configuration:
 ```json
 "connectors": {
   "connectorName": {
@@ -27,26 +27,26 @@ dpaLinkTool - это пример вызова REST API DPA и применен�
 }
 ```
 
-# Список рабочих центров
+# Get a list of equipment
 
 ```powershell
 dpaLinkTool.exe get equipment
 ```
-Список рабочих центров в формате json будет выведен в STDOUT.
+The json result is sent to STDOUT.
 
-# Список индикаторов
+# Get a list of indicators
 
 ```powershell
 dpaLinkTool.exe get indicators
 ```
-Список индикаторов в формате json будет выведен в STDOUT.
+The json result is sent to STDOUT.
 
-# Значения индикаторов
+# Get indicator values
 
 ```powershell
 dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04:00:00" --cfg "cfg.xml"
 ```
-Запросить значения индикаторов за период [from, to], далее использовать коннекторы, чтобы передать значения индикаторов в другие системы. Перечень индикаторов и коннекторы определяются в файле "cfg.xml":
+Receives indicator values for the specified period [from, to], then utilize connectors to transfer data to external systems. The list of indicateros and applyed connectors are defined in "cfg.xml":
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
