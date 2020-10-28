@@ -46,7 +46,7 @@ The json result is sent to STDOUT.
 ```powershell
 dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04:00:00" --cfg "cfg.xml"
 ```
-Receives indicator values for the specified period [from, to], then utilize connectors to transfer data to external systems. The list of indicateros and applyed connectors are defined in "cfg.xml":
+Receives indicator values for the specified period [from, to], then utilizes connectors to transfer data to external system. The list of indicators and applied connectors are defined in "cfg.xml":
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -54,27 +54,27 @@ Receives indicator values for the specified period [from, to], then utilize conn
   <EquipmentConnectorCfg>
     <ID>26</ID>
     <Name>Alpha 700-IST-1</Name>
-    <DepartmentName>Цех №1 / Подразделение Alpha</DepartmentName>
+    <DepartmentName>Area №1 / Alpha location</DepartmentName>
     <Indicators>
       <IndicatorConnectorCfg>
         <ID>60407578</ID>
-        <Name>Скорость подачи Chanel 1, мм/мин</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Feedrate Channel 1, mm/min</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>out1</Connector>
       </IndicatorConnectorCfg>
       <IndicatorConnectorCfg>
         <ID>60407579</ID>
-        <Name>Коррекция скорости подачи Chanel 1, %</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Feedrate override Chanel 1, %</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>insert1</Connector>
       </IndicatorConnectorCfg>
       <IndicatorConnectorCfg>
         <ID>60407580</ID>
-        <Name>Коррекция ускоренного хода Chanel 1, %</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Rapid traverse override Channel 1, %</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>insert1</Connector>
       </IndicatorConnectorCfg>
     </Indicators>
@@ -82,13 +82,13 @@ Receives indicator values for the specified period [from, to], then utilize conn
 </ArrayOfEquipmentConnectorCfg>
 ```
 
-# Генерация файла конфигурации индикторов и коннекторов
+# To generate a configuration file with a list of indicators and applied connectors
 
 ```powershell
 dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 ```
 
-# Пример настройки коннектора CONSOLE
+# An example of CONSOLE connector configuration
 
 ```json
 "out1": {
@@ -103,7 +103,7 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
   }
 }
 ```
-# Пример настройки коннектора MSSQL
+# An example of MSSQL connector configuration
 
 ```json
 "insert1": {
@@ -121,7 +121,7 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 }
 ```
 
-# Импорт данных за предыдущий час
+# To upload the data of the previous hour
 ```powershell
 $currentTime = Get-Date
 $periodTo = $currentTime.Date.AddHours($currentTime.Hour)
