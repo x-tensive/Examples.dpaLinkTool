@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -94,8 +96,13 @@ namespace dpaLinkTool.Client
             handler.CookieContainer = CookieContainer;
 
             Client = new HttpClient(handler) {
-                BaseAddress = new Uri(baseAddress)
+                BaseAddress = new Uri(baseAddress),
             };
+
+            Client.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
+            
+            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("dpaLinkTool", $"{assemblyVersion.Major}.{assemblyVersion.Minor}"));
         }
 
         protected virtual void Dispose(bool full)
