@@ -1,10 +1,10 @@
 # Examples.dpaLinkTool
 
-dpaLinkTool - это пример вызова REST API DPA и применение коннекторов для передачи данных из DPA в другие системы.
+This project contains an example code of how to call DPA REST API and how to utilize "connectors" to push data from DPA to external systems.
 
 # appsettings.json
 
-Базовый адрес DPA и учетная запись для вызовов REST API:
+Base url and account to access REST API:
 ```json
 "dpa": {
   "baseUrl": "http://dpadev.intranet.x-tensive.com",
@@ -13,7 +13,7 @@ dpaLinkTool - это пример вызова REST API DPA и применен�
 }
 ```
 
-Настройка коннекторов:
+Connectors configuration:
 ```json
 "connectors": {
   "connectorName": {
@@ -27,26 +27,26 @@ dpaLinkTool - это пример вызова REST API DPA и применен�
 }
 ```
 
-# Список рабочих центров
+# Get a list of equipment
 
-```cmd
+```powershell
 dpaLinkTool.exe get equipment
 ```
-Список рабочих центров в формате json будет выведен в STDOUT.
+The json result is sent to STDOUT.
 
-# Список индикаторов
+# Get a list of indicators
 
-```cmd
+```powershell
 dpaLinkTool.exe get indicators
 ```
-Список индикаторов в формате json будет выведен в STDOUT.
+The json result is sent to STDOUT.
 
-# Значения индикаторов
+# Get indicator values
 
-```cmd
+```powershell
 dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04:00:00" --cfg "cfg.xml"
 ```
-Запросить значения индикаторов за период [from, to], далее использовать коннекторы, чтобы передать значения индикаторов в другие системы. Перечень индикаторов и коннекторы определяются в файле "cfg.xml":
+Receives indicator values for the specified period [from, to], then utilizes connectors to transfer data to external system. The list of indicators and applied connectors are defined in "cfg.xml":
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -54,27 +54,27 @@ dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04
   <EquipmentConnectorCfg>
     <ID>26</ID>
     <Name>Alpha 700-IST-1</Name>
-    <DepartmentName>Цех №1 / Подразделение Alpha</DepartmentName>
+    <DepartmentName>Area №1 / Alpha location</DepartmentName>
     <Indicators>
       <IndicatorConnectorCfg>
         <ID>60407578</ID>
-        <Name>Скорость подачи Chanel 1, мм/мин</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Feedrate Channel 1, mm/min</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>out1</Connector>
       </IndicatorConnectorCfg>
       <IndicatorConnectorCfg>
         <ID>60407579</ID>
-        <Name>Коррекция скорости подачи Chanel 1, %</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Feedrate override Chanel 1, %</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>insert1</Connector>
       </IndicatorConnectorCfg>
       <IndicatorConnectorCfg>
         <ID>60407580</ID>
-        <Name>Коррекция ускоренного хода Chanel 1, %</Name>
-        <Device>Chanel 1</Device>
-        <DeviceClass>Канал</DeviceClass>
+        <Name>Rapid traverse override Channel 1, %</Name>
+        <Device>Channel 1</Device>
+        <DeviceClass>Channel</DeviceClass>
         <Connector>insert1</Connector>
       </IndicatorConnectorCfg>
     </Indicators>
@@ -82,13 +82,13 @@ dpaLinkTool.exe push indicators --from "20.10.2020 00:00:00" --to "20.10.2020 04
 </ArrayOfEquipmentConnectorCfg>
 ```
 
-# Генерация файла конфигурации индикторов и коннекторов
+# To generate a configuration file with a list of indicators and applied connectors
 
-```cmd
+```powershell
 dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 ```
 
-# Пример настройки коннектора CONSOLE
+# An example of CONSOLE connector configuration
 
 ```json
 "out1": {
@@ -103,7 +103,7 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
   }
 }
 ```
-# Пример настройки коннектора MSSQL
+# An example of MSSQL connector configuration
 
 ```json
 "insert1": {
@@ -119,4 +119,14 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
     "@value": "value.Value.GetDouble()"
   }
 }
+```
+
+# To upload the data of the previous hour
+```powershell
+$currentTime = Get-Date
+$periodTo = $currentTime.Date.AddHours($currentTime.Hour)
+$periodFrom = $periodTo.AddHours(-1)
+$periodToStr = $periodTo.ToString()
+$periodFromStr = $periodFrom.ToString()
+dpaLinkTool.exe push indicators --from "$periodFromStr" --to "$periodToStr" --cfg "cfg.xml"
 ```
