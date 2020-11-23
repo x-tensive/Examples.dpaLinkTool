@@ -103,6 +103,12 @@ namespace dpaLinkTool.Client
             
             var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
             Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("dpaLinkTool", $"{assemblyVersion.Major}.{assemblyVersion.Minor}"));
+
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //Client.DefaultRequestHeaders.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));
+            //Client.DefaultRequestHeaders.AcceptLanguage.TryParseAdd("*");
+
+            Client.DefaultRequestHeaders.Connection.Add("keep-alive");
         }
 
         protected virtual void Dispose(bool full)
