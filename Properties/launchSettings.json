@@ -2,7 +2,7 @@
   "profiles": {
     "dpaLinkTool": {
       "commandName": "Project",
-      "commandLineArgs": "get indicators"
+      "commandLineArgs": "dpaLinkTool.exe push  indicators --from \"01.12.2020 00:00:00\" --to \"10.12.2020 00:00:05\" --cfg \"3.xml\""
     }
   }
 }

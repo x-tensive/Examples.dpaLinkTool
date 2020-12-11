@@ -38,6 +38,20 @@ namespace dpaLinkTool.Config
             };
         }
 
+        private InfluxdbConnectorCfg CreateInfluxdbConnectorCfg(string name, IConfigurationSection configuration)
+        {
+            return new InfluxdbConnectorCfg
+            {
+                Name = name,
+                Type = "influxdb",
+                Url = configuration.GetValue<string>("url"),
+                Token = configuration.GetValue<string>("token"),
+                Org = configuration.GetValue<string>("org"),
+                Bucket = configuration.GetValue<string>("bucket"),
+                Params = GetParams(configuration.GetSection("params")).ToArray()
+            };
+        }
+
         public ConnectorCfgBase GetConnectorCfg(string name)
         {
             return connectorCfgHash[name];
@@ -58,6 +72,8 @@ namespace dpaLinkTool.Config
                     connectorCfgHash.Add(childConfig.Key, CreateConsoleConnectorCfg(childConfig.Key, childConfig));
                 else if (connectorType == "mssql")
                     connectorCfgHash.Add(childConfig.Key, CreateMssqlConnectorCfg(childConfig.Key, childConfig));
+                else if (connectorType == "influxdb")
+                    connectorCfgHash.Add(childConfig.Key, CreateInfluxdbConnectorCfg(childConfig.Key, childConfig));
                 else
                     throw new NotSupportedException();
             }
