@@ -34,6 +34,12 @@ dpaLinkTool.exe get equipment
 ```
 The json result is sent to STDOUT.
 
+# Write data to CNC
+
+```powershell
+dpaLinkTool.exe set value --equipmentId 123 --url "/Channel/Parameter/R[123]" --value "3.14"
+```
+
 # Get a list of indicators
 
 ```powershell

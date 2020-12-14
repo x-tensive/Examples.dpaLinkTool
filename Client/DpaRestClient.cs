@@ -65,6 +65,15 @@ namespace dpaLinkTool.Client
             return indicatorsResponse;
         }
 
+        public async Task WriteVariable(long equipmentId, DriverWriteItem driverWriteItem)
+        {
+            var payload = JsonSerializer.Serialize(driverWriteItem);
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            var response = await Client.PostAsync($"/api/equipment/write/{equipmentId}", content);
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new InvalidOperationException($"Action failed: {response.StatusCode}");
+        }
+
         public async Task<IndicatorValue[]> GetIndicatorValues(long indicatorId, DateTime from, DateTime to)
         {
             var payload = JsonSerializer.Serialize(new {

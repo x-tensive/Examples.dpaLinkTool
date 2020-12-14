@@ -70,6 +70,21 @@ namespace dpaLinkTool
             return parent;
         }
 
+        private static Command WithSetCommands(this Command parent)
+        {
+            var extCmd = BuildCommand("set", true)
+                .WithSubCommand("value", true, subCommand => {
+                    subCommand
+                    .WithHandler(CommandHandler.Create((long equipmentId, string url, string value)=> EquipmentHandler.SetValue(equipmentId, url, value)))
+                  .WithOption<long>("--equipmentId", "equipment id", true)
+                  .WithOption<string>("--url", "varaible url", true)
+                  .WithOption<string>("--value", "value to set", true);
+          });
+
+          parent.AddCommand(extCmd);
+          return parent;
+        }
+
         private static Command WithCreateConnectorsConfigCommands(this Command parent)
         {
             var extCmd = BuildCommand("createConnectorsConfig", true)
@@ -103,7 +118,8 @@ namespace dpaLinkTool
             var rootCmd = BuildRootCommand("DPA LINK tool")
                 .WithGetCommands()
                 .WithCreateConnectorsConfigCommands()
-                .WithPushCommands();
+                .WithPushCommands()
+                .WithSetCommands();
 
             return await rootCmd.InvokeAsync(args);
         }
