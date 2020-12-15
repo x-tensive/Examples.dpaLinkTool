@@ -109,6 +109,7 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
   }
 }
 ```
+
 # An example of MSSQL connector configuration
 
 ```json
@@ -127,7 +128,24 @@ dpaLinkTool.exe createConnectorsConfig indicators --fileName "cfg.xml"
 }
 ```
 
+# An example of INFLUXDB connector configuration
+
+```json
+"influxdb1": {
+  "type": "influxdb",
+  "url": "http://192.168.0.249:8086",
+  "token": "O-YmomQnsZhGf_Fa56e88871sPssp-v3jwFG8jG94kPhtXkcQlRndDaQ0CZfGkpsdpBf6QbI6DQ==",
+  "org": "X-tensive",
+  "bucket": "default",
+  "params": {
+    "equipment": "equipment.Name",
+    "indicator": "indicator.Name"
+  }
+}
+```
+
 # To upload the data of the previous hour
+
 ```powershell
 $currentTime = Get-Date
 $periodTo = $currentTime.Date.AddHours($currentTime.Hour)
