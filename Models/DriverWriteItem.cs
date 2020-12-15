@@ -5,12 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace dpaLinkTool.Models
 {
-	public class DriverWriteItem
-	{
-    [JsonPropertyName("url")]
-    public string Url { get; set; }
+    public class DriverWriteItem
+    {
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
 
-    [JsonPropertyName("values")]
-    public string[] Values { get; set; }
-  }
+        [JsonPropertyName("values")]
+        public string[] Values { get; set; }
+    }
 }

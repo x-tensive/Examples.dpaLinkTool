@@ -38,10 +38,10 @@ namespace dpaLinkTool.Handlers
 
         public async static Task SetValue(long equipmentId, string url, string value)
         {
-            using (var client = new DpaRestClient(LinkConfig.DPA.BaseUrl))
-            {
+            using (var client = new DpaRestClient(LinkConfig.DPA.BaseUrl)) {
                 await client.Login(LinkConfig.DPA.UserName, LinkConfig.DPA.Password);
-                await client.WriteVariable(equipmentId, new DriverWriteItem {Url=url, Values=new string[] { value } });
+                await client.WriteVariable(equipmentId, new DriverWriteItem { Url = url, Values = new string[] { value } });
+
                 Console.WriteLine("OK");
             }
         }
