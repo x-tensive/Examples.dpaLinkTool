@@ -37,8 +37,14 @@ The json result is sent to STDOUT.
 # Write data to CNC
 
 ```powershell
-dpaLinkTool.exe set value --equipmentId 123 --url "/Channel/Parameter/R[123]" --value "3.14"
+dpaLinkTool.exe set value --equipmentId 112233 --url "/Channel/Parameter/R[123]" --value "3.14"
 ```
+Set value 3.14 to R register №123 for Equipment with id 112233
+
+```powershell
+dpaLinkTool.exe set value --equipmentId 112233 --url "Some_URL"
+```
+Set empty string value to Some_URL for Equipment with id 112233
 
 # Get a list of indicators
 

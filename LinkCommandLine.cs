@@ -103,10 +103,10 @@ namespace dpaLinkTool
             var extCmd = BuildCommand("set", true)
                 .WithSubCommand("value", true, subCommand => {
                     subCommand
-                    .WithHandler(CommandHandler.Create((long equipmentId, string url, string value) => EquipmentHandler.SetValue(equipmentId, url, value)))
+                    .WithHandler(CommandHandler.Create((long equipmentId, string url, string value) => EquipmentHandler.SetValue(equipmentId, url, value ?? string.Empty)))
                   .WithOption<long>("--equipmentId", "equipment id", true)
                   .WithOption<string>("--url", "varaible url", true)
-                  .WithOption<string>("--value", "value to set", true);
+                  .WithOption<string>("--value", "value to set", false);
                 });
 
             parent.AddCommand(extCmd);
